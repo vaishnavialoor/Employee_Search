@@ -17,17 +17,18 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
-EmployeeDao employeeDao;
+    EmployeeDao employeeDao;
+
     @GetMapping("/salary")
-    public ResponseEntity<List<Employee>> getEmployeeListBasedOnSalary(@RequestParam Integer salary){
-        List<Employee> res=employeeDao.fetchEmployeeListBasedOnSalary(salary);
-        return new ResponseEntity<>(res,HttpStatus.OK);
+    public ResponseEntity<List<Employee>> getEmployeeListBasedOnSalary(@RequestParam Integer salary) {
+        List<Employee> res = employeeDao.fetchEmployeeListBasedOnSalary(salary);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping("/location")
-    public ResponseEntity<List<emp_loc_join>> getEmployeeListBasedOnLocation(@RequestParam String location){
-        List<emp_loc_join> res=employeeDao.fetchEmployeeListBasedOnLocation(location);
-        return new ResponseEntity<>(res,HttpStatus.OK);
+    public ResponseEntity<List<emp_loc_join>> getEmployeeListBasedOnLocation(@RequestParam String location) {
+        List<emp_loc_join> res = employeeDao.fetchEmployeeListBasedOnLocation(location);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
 }

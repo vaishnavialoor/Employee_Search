@@ -1,0 +1,2 @@
+http://localhost:8080/employee/salary?salary=30000
+http://localhost:8080/employee/location?location="Mumbai"
