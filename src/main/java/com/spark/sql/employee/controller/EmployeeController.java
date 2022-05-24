@@ -8,10 +8,7 @@ import com.spark.sql.employee.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +32,26 @@ public class EmployeeController {
     @GetMapping("/location")
     public ResponseEntity<List<emp_loc_join>> getEmployeeListBasedOnLocation(@RequestParam String location) {
         List<emp_loc_join> res = employeeDao.fetchEmployeeListBasedOnLocation(location);
+
+        if(res.size()==0) {
+            throw new NoResultsFoundException();
+        }
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+  /*  @GetMapping("/date_of_joining")
+    public ResponseEntity<List<Emp_loc_dept>> getEmployeeListBasedOnLocation(@RequestBody EmpSearchRequest empSearchRequest) {
+        List<Emp_loc_dept> res = employeeDao.fetchEmployeeListBasedOnQuery(empSearchRequest);
+
+        if(res.size()==0) {
+            throw new NoResultsFoundException();
+        }
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }*/
+
+    @GetMapping("/date_of_joining")
+    public ResponseEntity<List<Emp_loc_dept>> getEmployeeListBasedOnLocation() {
+        List<Emp_loc_dept> res = employeeDao.fetchEmployeeListBasedOnQuery();
 
         if(res.size()==0) {
             throw new NoResultsFoundException();

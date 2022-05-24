@@ -7,7 +7,11 @@ import org.apache.spark.sql.*;
 import org.apache.spark.sql.SparkSession;
 import org.springframework.stereotype.Component;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
+
+import static org.apache.spark.sql.functions.col;
 
 @Component
 public class EmployeeDao {
@@ -29,6 +33,13 @@ public class EmployeeDao {
             .option("user", "root")
             .option("password", "Sastry123$").load();
 
+    Dataset<Row> dept_df=sparkSession.read().
+            format("jdbc").
+            option("url", "jdbc:mysql://localhost:3306/employee")
+            .option("dbtable", "department")
+            .option("user", "root")
+            .option("password", "Sastry123$").load();
+
     public List<Employee> fetchEmployeeListBasedOnSalary(Integer salary) {
         Encoder<Employee> emp_encoder = Encoders.bean(Employee.class);
         List<Employee> result = emp_df.filter("emp_salary>" + salary).as(emp_encoder).collectAsList();
@@ -43,9 +54,16 @@ public class EmployeeDao {
         return result;
     }
 
-     /*   emp_df.filter("emp_join_date> '2021-01-01'")
-        Dataset <Row> emp_loc_join = emp_df.join(loc_df,emp_df.col("emp_loc_id").equalTo(loc_df.col("loc_id")));
-        emp_loc_join.filter("loc_name='Mumbai'");*/
+    public List<Emp_loc_dept> fetchEmployeeListBasedOnQuery() {
+        Encoder<Emp_loc_dept> emp_encoder = Encoders.bean(Emp_loc_dept.class);
+
+        List<Emp_loc_dept> res=emp_df.join(loc_df,emp_df.col("emp_loc_id").equalTo(loc_df.col("loc_id"))).
+                                join(dept_df,emp_df.col("emp_dept_id").equalTo(dept_df.col("dept_id")))
+                                .as(emp_encoder).collectAsList();
+        return res;
+
+    }
+
 }
 
 
