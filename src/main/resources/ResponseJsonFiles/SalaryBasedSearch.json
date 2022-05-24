@@ -1,0 +1,38 @@
+[
+  {
+    "emp_id": 3202,
+    "emp_name": "Shantha",
+    "emp_salary": 30000,
+    "emp_loc_id": 2
+  },
+  {
+    "emp_id": 3203,
+    "emp_name": "Vikram",
+    "emp_salary": 40000,
+    "emp_loc_id": 3
+  },
+  {
+    "emp_id": 3204,
+    "emp_name": "Balu",
+    "emp_salary": 50000,
+    "emp_loc_id": 1
+  },
+  {
+    "emp_id": 3205,
+    "emp_name": "Mahesh",
+    "emp_salary": 70000,
+    "emp_loc_id": 1
+  },
+  {
+    "emp_id": 3206,
+    "emp_name": "Ranjit",
+    "emp_salary": 30000,
+    "emp_loc_id": 4
+  },
+  {
+    "emp_id": 3207,
+    "emp_name": "Lokesh",
+    "emp_salary": 60000,
+    "emp_loc_id": 4
+  }
+]
