@@ -1,5 +1,8 @@
 package com.spark.sql.employee.vo;
 
+import lombok.Data;
+
+@Data
 public class Emp_loc_dept {
     private int emp_id;
     private String emp_name;

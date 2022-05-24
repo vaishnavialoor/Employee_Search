@@ -39,17 +39,9 @@ public class EmployeeController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-  /*  @GetMapping("/date_of_joining")
-    public ResponseEntity<List<Emp_loc_dept>> getEmployeeListBasedOnLocation(@RequestBody EmpSearchRequest empSearchRequest) {
-        List<Emp_loc_dept> res = employeeDao.fetchEmployeeListBasedOnQuery(empSearchRequest);
 
-        if(res.size()==0) {
-            throw new NoResultsFoundException();
-        }
-        return new ResponseEntity<>(res, HttpStatus.OK);
-    }*/
 
-    @GetMapping("/date_of_joining")
+    @GetMapping("/three_tables_join")
     public ResponseEntity<List<Emp_loc_dept>> getEmployeeListBasedOnLocation() {
         List<Emp_loc_dept> res = employeeDao.fetchEmployeeListBasedOnQuery();
 
@@ -58,5 +50,13 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
+    @GetMapping("/left_semi")
+    public ResponseEntity<List<emp_loc_join>> getEmployeeResLeftSemi() {
+        List<emp_loc_join> res = employeeDao.getLeftSemiRes();
 
+        if(res.size()==0) {
+            throw new NoResultsFoundException();
+        }
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
 }

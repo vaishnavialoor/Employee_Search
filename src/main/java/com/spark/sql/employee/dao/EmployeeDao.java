@@ -57,13 +57,19 @@ public class EmployeeDao {
     public List<Emp_loc_dept> fetchEmployeeListBasedOnQuery() {
         Encoder<Emp_loc_dept> emp_encoder = Encoders.bean(Emp_loc_dept.class);
 
-        List<Emp_loc_dept> res=emp_df.join(loc_df,emp_df.col("emp_loc_id").equalTo(loc_df.col("loc_id"))).
-                                join(dept_df,emp_df.col("emp_dept_id").equalTo(dept_df.col("dept_id")))
+        List<Emp_loc_dept> res=emp_df.join(loc_df,emp_df.col("emp_loc_id").equalTo(loc_df.col("loc_id")),"inner").
+                                join(dept_df,emp_df.col("emp_dept_id").equalTo(dept_df.col("dept_id")),"inner")
                                 .as(emp_encoder).collectAsList();
         return res;
 
     }
 
+    public List<emp_loc_join> getLeftSemiRes() {
+        Dataset<Row> emp_loc_join = emp_df.join(loc_df, emp_df.col("emp_loc_id").equalTo(loc_df.col("loc_id")),"leftsemi");
+        Encoder<emp_loc_join> emp_loc_encoder = Encoders.bean(emp_loc_join.class);
+        List<emp_loc_join> result = em
+        return result;
+    }
 }
 
 
