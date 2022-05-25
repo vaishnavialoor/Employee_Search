@@ -51,8 +51,28 @@ public class EmployeeController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
     @GetMapping("/left_semi")
-    public ResponseEntity<List<emp_loc_join>> getEmployeeResLeftSemi() {
-        List<emp_loc_join> res = employeeDao.getLeftSemiRes();
+    public ResponseEntity<List<Employee>> getEmployeeResLeftSemi() {
+        List<Employee> res = employeeDao.getLeftSemiRes();
+
+        if(res.size()==0) {
+            throw new NoResultsFoundException();
+        }
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @GetMapping("/left_anti")
+    public ResponseEntity<List<Employee>> getEmployeeResLeftAnti() {
+        List<Employee> res = employeeDao.getLeftAntiRes();
+
+        if(res.size()==0) {
+            throw new NoResultsFoundException();
+        }
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @GetMapping("/left_outer")
+    public ResponseEntity<List<emp_dept_join>> getEmployeeResLeftOuter() {
+        List<emp_dept_join> res = employeeDao.getLeftOuterRes();
 
         if(res.size()==0) {
             throw new NoResultsFoundException();

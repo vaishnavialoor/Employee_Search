@@ -64,10 +64,24 @@ public class EmployeeDao {
 
     }
 
-    public List<emp_loc_join> getLeftSemiRes() {
-        Dataset<Row> emp_loc_join = emp_df.join(loc_df, emp_df.col("emp_loc_id").equalTo(loc_df.col("loc_id")),"leftsemi");
-        Encoder<emp_loc_join> emp_loc_encoder = Encoders.bean(emp_loc_join.class);
-        List<emp_loc_join> result = em
+    public List<Employee> getLeftSemiRes() {
+        Dataset<Row> emp_dept_join = emp_df.join(dept_df, emp_df.col("emp_dept_id").equalTo(dept_df.col("dept_id")),"leftsemi");
+        Encoder<Employee> emp_encoder = Encoders.bean(Employee.class);
+        List<Employee> result = emp_dept_join.as(emp_encoder).collectAsList();
+        return result;
+    }
+
+    public List<Employee> getLeftAntiRes() {
+        Dataset<Row> emp_dept_join = emp_df.join(dept_df, emp_df.col("emp_dept_id").equalTo(dept_df.col("dept_id")),"leftanti");
+        Encoder<Employee> emp_encoder = Encoders.bean(Employee.class);
+        List<Employee> result = emp_dept_join.as(emp_encoder).collectAsList();
+        return result;
+    }
+
+    public List<emp_dept_join> getLeftOuterRes() {
+        Dataset<Row> emp_dept_join = emp_df.join(dept_df, emp_df.col("emp_dept_id").equalTo(dept_df.col("dept_id")),"leftouter");
+        Encoder<emp_dept_join> emp_encoder = Encoders.bean(emp_dept_join.class);
+        List<emp_dept_join> result = emp_dept_join.as(emp_encoder).collectAsList();
         return result;
     }
 }
