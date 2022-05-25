@@ -1,9 +1,10 @@
 package com.spark.sql.employee.controller;
 
-import com.spark.sql.employee.dao.EmployeeDao;
+//import com.spark.sql.employee.dslDao.EmployeeDao;
 import com.spark.sql.employee.exception.InvalidInputException;
 import com.spark.sql.employee.exception.NoResultsFoundException;
 import com.spark.sql.employee.model.Employee;
+import com.spark.sql.employee.sparksqlDao.EmployeeDao;
 import com.spark.sql.employee.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
