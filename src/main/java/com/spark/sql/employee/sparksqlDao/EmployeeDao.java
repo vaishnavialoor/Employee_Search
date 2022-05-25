@@ -70,7 +70,7 @@ public class EmployeeDao {
         emp_df.createOrReplaceTempView("emp");
         dept_df.createOrReplaceTempView("dept");
         Encoder<Employee> emp_encoder = Encoders.bean(Employee.class);
-        List<Employee> result = sparkSession.sql("select * from emp e left semi join dept d on e.emp_dept_id=d.dept_id").as(emp_encoder).collectAsList();
+        List<Employee> result = sparkSession.sql("select * from emp e left semi join dept d on e.emp_dept_id==d.dept_id").as(emp_encoder).collectAsList();
         return result;
     }
 
@@ -83,8 +83,7 @@ public class EmployeeDao {
     }
 
     public List<emp_dept_join> getLeftOuterRes() {
-        emp_df.printSchema();
-        dept_df.printSchema();
+
         emp_df.createOrReplaceTempView("emp");
         dept_df.createOrReplaceTempView("dept");
         Encoder<emp_dept_join> emp_dept_encoder = Encoders.bean(emp_dept_join.class);

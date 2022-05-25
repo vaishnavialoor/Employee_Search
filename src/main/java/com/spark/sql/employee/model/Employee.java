@@ -5,11 +5,11 @@ import lombok.*;
 
 @Data
 public class Employee {
-    private  int emp_id;
+    private  Integer emp_id;
     private String emp_name;
-    private  int emp_salary;
+    private  Integer emp_salary;
     private  String emp_join_date;
-    private  int emp_loc_id;
+    private  Integer emp_loc_id;
 
 
 }
